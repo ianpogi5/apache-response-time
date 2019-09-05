@@ -242,7 +242,7 @@ How to install and configure the apache-response-time command.
 In 2 commands:
 
 ~~~~
-wget https://raw.githubusercontent.com/makeyourownmaker/apache-response-time/master/apache-response-time
+wget https://raw.githubusercontent.com/ianpogi5/apache-response-time/master/apache-response-time
 chmod u+x apache-response-time
 ~~~~
 
