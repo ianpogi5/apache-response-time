@@ -264,7 +264,7 @@ Edit your apache configuration file to enable the response time directive (*%D*)
 
 ~~~~
 #LogFormat "%h %l %u %t \"%r\" %>s %b"    # Default LogFormat
-LogFormat "%h %l %u %t \"%r\" %>s %b %D"  # LogFormat including response time
+LogFormat "%h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\" %D""  # LogFormat including response time
 ~~~~
 
 Restart apache.
