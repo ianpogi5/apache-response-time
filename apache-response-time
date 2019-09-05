@@ -132,15 +132,17 @@ sub get_stats {
     my @lines = slurp $logfile;
 
     foreach (@lines) {
-        if ( /^(\S+?)\s-\s-\s(\[.*?\])\s(.*?)\s(\d+)\s(\d+)\s(\d+)/ ) {
+        if ( /^(\S+?)\s-\s-\s(\[.*?\])\s(.*?)\s(\d+)\s(\d+)\s(.*?)\s(\".*\"?)\s(\d+)/ ) {
             my $ip     = $1;
             my $date   = $2;
             my $url    = $3;
             my $status = $4;
             my $bytes  = $5;
-            my $time   = $6;
+            my $referer= $6;
+            my $ua     = $7;
+            my $time   = $8;
 
-            if ( $url =~ /$BIN_PATH_RE/ && $status =~ /[23]\d\d/ && $date =~ /$date_re/ ) {
+            if ( $status =~ /[23]\d\d/ && $date =~ /$date_re/ ) {
                 my ( $method, $script_path, $protocol ) = $url =~ /^"(\w+)\s(\S+)\s(\S+)"$/;
 
                 next unless defined $script_path; # skips URLs containing spaces
@@ -552,11 +554,7 @@ sub set_value_for {
 sub get_script_name {
     my $path = shift;
 
-    return $path if $path eq 'overall';
-
-    my ($script) = $path =~ /$BIN_PATH_RE(\S+?.$SCRIPT_EXTENSION)/;
-
-    return $script;
+    return $path;
 }
 
 
